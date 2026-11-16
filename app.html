@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#174c3c">
+<title>CircleMate | Savings circle</title>
+<style>
+:root{--green:#174c3c;--green2:#e8f3ed;--ink:#17231e;--muted:#5c6c64;--line:#dce6df;--bg:#f5f8f6;--white:#fff;--amber:#fff2d8;--amberink:#805300}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.5 Arial,Helvetica,sans-serif}
+header{background:var(--green);color:white;padding:22px 18px 26px}
+.wrap{max-width:760px;margin:auto}
+.brand{font-weight:800;font-size:22px;letter-spacing:.2px}
+.tag{font-size:14px;opacity:.9;margin-top:3px}
+main{max-width:760px;margin:0 auto;padding:18px}
+.notice{background:#fff8e8;border:1px solid #f1dba8;color:#604500;border-radius:12px;padding:12px 14px;font-size:14px;margin-bottom:16px}
+h1{font-size:27px;line-height:1.2;margin:8px 0 4px}
+.sub{color:var(--muted);margin:0 0 18px}
+.stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:16px 0}
+.stat{background:white;border:1px solid var(--line);border-radius:14px;padding:15px}
+.stat .label{color:var(--muted);font-size:14px}
+.stat strong{display:block;font-size:25px;margin-top:4px}
+.next{background:var(--green2);border:1px solid #c9dfd1;border-radius:16px;padding:17px;margin:16px 0}
+.next small{font-weight:700;color:var(--green);text-transform:uppercase;letter-spacing:.6px}
+.next h2{font-size:22px;margin:5px 0}
+.next p{margin:0;color:#385449}
+.section-title{font-size:20px;margin:24px 0 10px}
+.member{display:flex;align-items:center;gap:12px;background:white;border:1px solid var(--line);border-radius:13px;padding:12px;margin:9px 0}
+.avatar{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:var(--green2);color:var(--green);font-weight:800;flex-shrink:0}
+.person{flex:1;min-width:0}
+.person strong{display:block;font-size:16px}
+.person span{font-size:14px;color:var(--muted)}
+.status{font-size:13px;font-weight:700;border-radius:20px;padding:5px 9px;white-space:nowrap}
+.paid{background:#e5f4e9;color:#17613d}
+.pending{background:var(--amber);color:var(--amberink)}
+button{font:inherit;font-weight:700;border:0;border-radius:10px;padding:11px 13px;cursor:pointer}
+.mark{background:var(--green);color:white;font-size:14px;margin-left:5px}
+.mark:focus-visible,a:focus-visible,button:focus-visible{outline:3px solid #e0a72e;outline-offset:3px}
+.mark:disabled{opacity:.55;cursor:default}
+.footer{font-size:13px;color:var(--muted);padding:22px 0 8px}
+.legend{display:flex;gap:12px;flex-wrap:wrap;font-size:14px;color:var(--muted);margin:8px 0}
+.legend span{display:flex;align-items:center;gap:6px}
+.dot{width:9px;height:9px;border-radius:50%;display:inline-block;background:#2a8a59}
+.dot.grey{background:#d69a24}
+@media(max-width:420px){body{font-size:16px}main{padding:14px}.stats{gap:8px}.stat{padding:12px}.stat strong{font-size:22px}.member{gap:8px;padding:10px}.avatar{width:38px;height:38px}.mark{padding:9px;font-size:13px}.status{font-size:12px;padding:4px 7px}}
+</style>
+</head>
+<body>
+<header><div class="wrap"><div class="brand">◉ CircleMate</div><div class="tag">Save together. See everything clearly.</div></div></header>
+<main>
+<div class="notice"><strong>Prototype only:</strong> This page uses invented names and sample data. It does not collect, hold or transfer real money.</div>
+<h1>Blanchardstown Friends Circle</h1>
+<p class="sub">November 2026 · 10 members · €100 each</p>
+
+<div class="stats">
+  <div class="stat"><div class="label">Paid this month</div><strong id="paidCount">6 of 10</strong></div>
+  <div class="stat"><div class="label">Collected so far</div><strong id="collected">€600</strong></div>
+</div>
+
+<section class="next" aria-live="polite">
+  <small>Next payout · Round 1</small>
+  <h2 id="nextName">Aisha Rahman</h2>
+  <p>They are due to receive the full circle pot of <strong>€1,000</strong> when all 10 payments are received.</p>
+</section>
+
+<h2 class="section-title">This month's payments</h2>
+<p class="sub">The organiser can mark a payment when the money has been received.</p>
+<div class="legend"><span><i class="dot"></i> Paid</span><span><i class="dot grey"></i> Waiting for payment</span></div>
+<div id="memberList" aria-live="polite"></div>
+<div class="footer">CircleMate is a demonstration record book, not a bank or payment service. All people and payment records shown here are fictional.</div>
+</main>
+<script>
+const members = [
+  {name:"Aisha Rahman", paid:true},
+  {name:"Daniel Murphy", paid:true},
+  {name:"Meera Nair", paid:true},
+  {name:"Omar Hassan", paid:true},
+  {name:"Sophie Byrne", paid:true},
+  {name:"Liam Kelly", paid:true},
+  {name:"Nina Thomas", paid:false},
+  {name:"Adam Walsh", paid:false},
+  {name:"Sara Khan", paid:false},
+  {name:"Noah Martin", paid:false}
+];
+const payoutOrder = ["Aisha Rahman","Daniel Murphy","Meera Nair","Omar Hassan","Sophie Byrne","Liam Kelly","Nina Thomas","Adam Walsh","Sara Khan","Noah Martin"];
+function render(){
+  const paid = members.filter(m=>m.paid).length;
+  document.getElementById("paidCount").textContent = `${paid} of ${members.length}`;
+  document.getElementById("collected").textContent = `€${(paid*100).toLocaleString("en-IE")}`;
+  const next = payoutOrder[0];
+  document.getElementById("nextName").textContent = next;
+  const list = document.getElementById("memberList");
+  list.innerHTML = "";
+  members.forEach((m,i)=>{
+    const row = document.createElement("div");
+    row.className = "member";
+    const initials = m.name.split(" ").map(x=>x[0]).slice(0,2).join("");
+    const avatar = document.createElement("div"); avatar.className="avatar"; avatar.textContent=initials;
+    const person = document.createElement("div"); person.className="person";
+    const name = document.createElement("strong"); name.textContent=m.name;
+    const amount = document.createElement("span"); amount.textContent="Monthly contribution: €100";
+    person.append(name,amount);
+    const status = document.createElement("span"); status.className="status "+(m.paid?"paid":"pending"); status.textContent=m.paid?"Paid":"Not paid";
+    row.append(avatar,person,status);
+    if(!m.paid){
+      const btn=document.createElement("button"); btn.className="mark"; btn.textContent="Mark paid";
+      btn.setAttribute("aria-label",`Mark ${m.name} as paid`);
+      btn.addEventListener("click",()=>{m.paid=true;render();});
+      row.append(btn);
+    }
+    list.append(row);
+  });
+}
+render();
+</script>
+</body>
+</html>

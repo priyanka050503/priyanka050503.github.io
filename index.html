@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#174c3c">
+<title>CircleMate | Save together with clarity</title>
+<style>
+:root{--green:#174c3c;--green2:#e8f3ed;--ink:#17231e;--muted:#596a61;--line:#dce6df;--bg:#f7faf8;--white:#fff}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:18px/1.6 Arial,Helvetica,sans-serif}
+.wrap{width:min(100% - 36px,980px);margin:auto}
+header{padding:22px 0;display:flex;align-items:center;justify-content:space-between}
+.logo{font-size:23px;font-weight:800;color:var(--green)}
+nav a{color:var(--green);font-weight:700;text-decoration:none}
+.hero{padding:58px 0 52px;display:grid;grid-template-columns:1.2fr .8fr;gap:30px;align-items:center}
+.eyebrow{font-size:14px;letter-spacing:1px;text-transform:uppercase;color:var(--green);font-weight:800}
+h1{font-size:clamp(36px,6vw,58px);line-height:1.08;letter-spacing:-1.5px;margin:12px 0 18px}
+.lead{font-size:20px;color:var(--muted);max-width:620px}
+.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:25px}
+.btn{display:inline-block;padding:14px 20px;border-radius:11px;background:var(--green);color:white;text-decoration:none;font-weight:800}
+.btn.secondary{background:white;color:var(--green);border:1px solid var(--line)}
+.preview{background:var(--green2);border:1px solid #cfe0d5;border-radius:22px;padding:22px;box-shadow:0 12px 30px #173e2b12}
+.preview-top{display:flex;justify-content:space-between;gap:12px;font-weight:700}
+.pill{background:white;color:var(--green);border-radius:30px;padding:4px 10px;font-size:13px}
+.preview h2{font-size:24px;margin:25px 0 3px}
+.amount{font-size:34px;font-weight:800;color:var(--green)}
+.bar{height:12px;border-radius:20px;background:#d1e1d7;overflow:hidden;margin:14px 0}
+.bar span{display:block;width:60%;height:100%;background:var(--green);border-radius:20px}
+.small{font-size:14px;color:var(--muted)}
+section.content{padding:45px 0}
+h2.section{font-size:32px;line-height:1.2;margin:0 0 12px}
+.intro{color:var(--muted);max-width:650px;margin:0 0 24px}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
+.step{background:white;border:1px solid var(--line);border-radius:16px;padding:20px}
+.num{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:var(--green2);color:var(--green);font-weight:800}
+.step h3{font-size:20px;margin:13px 0 6px}
+.step p{margin:0;color:var(--muted);font-size:16px}
+.cta{background:var(--green);color:white;border-radius:22px;padding:34px;margin:22px 0 46px}
+.cta h2{font-size:30px;margin:0 0 8px}
+.cta p{color:#e0eee6;margin:0 0 18px}
+.cta .btn{background:white;color:var(--green)}
+footer{border-top:1px solid var(--line);padding:22px 0 30px;color:var(--muted);font-size:14px}
+.prototype{background:#fff7e7;color:#604500;border:1px solid #f0dcae;border-radius:12px;padding:12px 14px;font-size:14px;margin:8px 0 0}
+@media(max-width:700px){.hero{grid-template-columns:1fr;padding:36px 0}.steps{grid-template-columns:1fr}.lead{font-size:18px}h2.section{font-size:28px}.cta{padding:25px}.wrap{width:min(100% - 28px,980px)}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header><div class="logo">◉ CircleMate</div><nav><a href="app.html">View the demo</a></nav></header>
+<div class="prototype"><strong>Student prototype:</strong> CircleMate is a concept demonstration using invented names and sample amounts. It is not a live financial service.</div>
+<main>
+<section class="hero">
+  <div>
+    <div class="eyebrow">For friends who save together</div>
+    <h1>No more guessing who has paid or whose turn is next.</h1>
+    <p class="lead">Keep your savings circle clear and organised. See this month's payments and the next payout in one simple place.</p>
+    <div class="actions">
+      <a class="btn" href="app.html">See how CircleMate works</a>
+      <a class="btn secondary" href="#how">How it works</a>
+    </div>
+  </div>
+  <div class="preview" aria-label="Example savings circle summary">
+    <div class="preview-top"><span>November circle</span><span class="pill">Sample view</span></div>
+    <h2>Payments received</h2>
+    <div class="amount">€600 / €1,000</div>
+    <div class="bar"><span></span></div>
+    <div class="small">6 of 10 members have paid</div>
+    <h2>Next payout</h2>
+    <strong>Aisha Rahman</strong>
+    <div class="small">Example member · fictional data</div>
+  </div>
+</section>
+
+<section class="content" id="how">
+  <h2 class="section">How it works</h2>
+  <p class="intro">A simple shared record for a group that already knows and trusts each other.</p>
+  <div class="steps">
+    <article class="step"><div class="num">1</div><h3>Everyone contributes</h3><p>Each of the ten members pays the agreed €100 for the month in the way the group already uses.</p></article>
+    <article class="step"><div class="num">2</div><h3>Payments are recorded</h3><p>The organiser marks each contribution as received, so the group can see what is still outstanding.</p></article>
+    <article class="step"><div class="num">3</div><h3>One member gets the pot</h3><p>The agreed member receives the €1,000 pot for that month. The turn order is clear to everyone.</p></article>
+  </div>
+</section>
+
+<section class="cta">
+  <h2>Would you try CircleMate?</h2>
+  <p>Join the sample interest list and tell us if a clear payment record would help your savings circle.</p>
+  <a class="btn" href="#interest">Join the interest list</a>
+  <a class="btn" href="app.html" style="margin-left:8px">Open the demo</a>
+</section>
+<section class="content" id="interest">
+  <h2 class="section">Tell us you are interested</h2>
+  <p class="intro">This is a sample waiting-list form. To receive real responses, connect it to your own free Formspree form before publishing.</p>
+  <form action="https://formspree.io/f/REPLACE_WITH_YOUR_FORM_ID" method="POST" style="background:white;border:1px solid var(--line);border-radius:16px;padding:20px;max-width:560px">
+    <label for="visitor-name" style="display:block;font-weight:700;margin-bottom:6px">Your name</label>
+    <input id="visitor-name" name="name" required style="width:100%;padding:13px;border:1px solid var(--line);border-radius:9px;font:inherit;margin-bottom:14px">
+    <label for="visitor-email" style="display:block;font-weight:700;margin-bottom:6px">Email address</label>
+    <input id="visitor-email" name="email" type="email" required style="width:100%;padding:13px;border:1px solid var(--line);border-radius:9px;font:inherit;margin-bottom:14px">
+    <label for="visitor-message" style="display:block;font-weight:700;margin-bottom:6px">What would help your circle?</label>
+    <textarea id="visitor-message" name="message" rows="3" style="width:100%;padding:13px;border:1px solid var(--line);border-radius:9px;font:inherit;margin-bottom:14px"></textarea>
+    <button class="btn" type="submit" style="border:0;cursor:pointer;font:inherit">Send response</button>
+  </form>
+</section>
+</main>
+<footer>
+  <strong>CircleMate</strong> · A student concept prototype.<br>
+  This demonstration does not process payments, hold funds or provide financial services. All names and payment records are invented.
+</footer>
+</div>
+</body>
+</html>
